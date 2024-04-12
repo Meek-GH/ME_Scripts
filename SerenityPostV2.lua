@@ -39,22 +39,23 @@ while API.Read_LoopyLoop() do
         balancePost()
     end
 
-    local pose = readPose()
-    if pose ~= lastPose then
-        if pose == "Crane" then
-            API.RandomSleep2(800, 600, 400)
-            API.KeyboardPress2(0x31, 0, 0)
-        elseif pose == "Bow" then
-            API.RandomSleep2(800, 600, 400)
-            API.KeyboardPress2(0x32, 0, 0)
-        elseif pose == "Lotus" then
-            API.RandomSleep2(800, 600, 400)
-            API.KeyboardPress2(0x33, 0, 0)
-        elseif pose == "Ward" then
-            API.RandomSleep2(800, 600, 400)
-            API.KeyboardPress2(0x34, 0, 0)
-        end
+        local pose = readPose()
+if pose ~= lastPose then
+    lastPose = pose
+    if pose == "Crane" then
+        API.RandomSleep2(800, 600, 400)
+        API.KeyboardPress2(0x31, 0, 0)
+    elseif pose == "Bow" then
+        API.RandomSleep2(800, 600, 400)
+        API.KeyboardPress2(0x32, 0, 0)
+    elseif pose == "Lotus" then
+        API.RandomSleep2(800, 600, 400)
+        API.KeyboardPress2(0x33, 0, 0)
+    elseif pose == "Ward" then
+        API.RandomSleep2(800, 600, 400)
+        API.KeyboardPress2(0x34, 0, 0)
     end
+end
 
     local currentXp, currentTime = API.GetSkillXP("AGILITY"), os.time()
     if currentXp > lastXp then
