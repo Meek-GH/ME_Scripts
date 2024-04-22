@@ -20,6 +20,10 @@ local function windowIsOpen()
     return #API.GetAllObjArrayInteract({ 94053 }, 4, { 0 }) > 0
 end
 
+local function lightShortcut()
+    return #API.GetAllObjArrayInteract({ 20273 }, 2, { 1 }) > 0
+end
+
 local function nearWalkway()
     return API.PInArea(2176, 3, 3400, 3)
 end
@@ -70,14 +74,18 @@ while API.Read_LoopyLoop() do
         API.RandomSleep2(9000,800,600)
         API.WaitUntilMovingandAnimEnds()
     elseif nearZipline() then
-        API.DoAction_Object1(0xb5,API.OFF_ACT_GeneralObject_route0,{ 94057 },50) -- Slide down Zipline
-        API.RandomSleep2(9000,800,600)
-        API.WaitUntilMovingandAnimEnds()
+        if lightShortcut() then
+            API.DoAction_NPC(0xb5,API.OFF_ACT_InteractNPC_route,{ 20273 },2) -- Light at Rooftop
+            API.RandomSleep2(5000,800,600)
+            API.WaitUntilMovingandAnimEnds()
+        else
+            API.DoAction_Object1(0xb5,API.OFF_ACT_GeneralObject_route0,{ 94057 },50) -- Slide down Zipline
+            API.RandomSleep2(9000,800,600)
+            API.WaitUntilMovingandAnimEnds()
+        end
     elseif nearLightCreature() then
         API.DoAction_NPC(0xb5,API.OFF_ACT_InteractNPC_route,{ 20274 },5) -- Merge with Light Creature
         API.RandomSleep2(9000,800,600)
         API.WaitUntilMovingandAnimEnds()
     end
 end
-
-
